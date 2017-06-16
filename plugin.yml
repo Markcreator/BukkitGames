@@ -1,0 +1,13 @@
+name: BukkitGames
+main: me.Markcreator.SurvivalGames.Main
+version: 0.9
+load: POSTWORLD
+description: >
+             The BukkitGames plugin made by Markcreator.
+commands:
+  bg:
+    description: Main command.
+  vote:
+    description: Vote command.
+  votestart:
+    description: Vote command.

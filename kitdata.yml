@@ -1,0 +1,89 @@
+kits:
+  Archer:
+    logoItem: 261
+    kitLore:
+      - '&7Shoot your enemys with'
+      - '&7this trusty Bow!'
+      - ''
+      - '&7(1 Bow + 10 Arrows)'
+    price: 750
+    items:
+      '261': 1
+      '262': 10
+  ArcherPro:
+    logoItem: 261
+    kitLore:
+      - '&7Blow your ememys away'
+      - '&7with this powerful Bow!'
+      - ''
+      - '&7(1 Bow + 3 Arrows +'
+      - '&7Explosive Arrows)'
+    price: 3500
+    items:
+      '261': 1
+      '262': 3
+    potions:
+      SPEED:
+        amplifier: 1
+        duration: 3600
+    effect: explodingArrows
+  FlamingArcher:
+    logoItem: 261
+    kitLore:
+      - '&7Shoot all your'
+      - '&7enemys with flaming'
+      - '&7fury!'
+      - ''
+      - '&7(1 Bow + 5'
+      - '&7Arrows + Flame'
+      - '&7Arrows)'
+    price: 3500
+    items:
+      '261': 1
+      '262': 5
+    effect: flamingArrows
+  SwordsMan:
+    logoItem: 268
+    kitLore:
+      - '&7Swing this sword to'
+      - '&7kill your enemys!'
+      - ''
+      - '&7(1 Wood Sword)'
+    price: 300
+    items:
+      '268': 1
+  SwordsManPro:
+    logoItem: 272
+    kitLore:
+      - '&7A strong sword to cut'
+      - '&7through tons of enemies!'
+      - ''
+      - '&7(1 Stone Sword)'
+    price: 500
+    items:
+      '272': 1
+  Flamethrower:
+    logoItem: 385
+    kitLore:
+      - '&7Spit out your burning'
+      - '&7flames of death!'
+      - ''
+      - '&7(32 Fire Charges +'
+      - '&7exploding Fire Charges)'
+    price: 1500
+    items:
+      '385': 32
+    effect: flamethrower
+  Granader:
+    logoItem: 402
+    kitLore:
+      - '&7Throw with your exploding'
+      - '&7balls of death!'
+      - ''
+      - '&7(20 Firework Stars +'
+      - '&7exploding Firework'
+      - '&7Stars)'
+    price: 2000
+    items:
+      '402': 20
+    effect: granades
