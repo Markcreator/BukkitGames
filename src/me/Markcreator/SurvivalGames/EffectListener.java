@@ -48,7 +48,7 @@ public class EffectListener implements Listener {
     	
     	if(playerKitEffect(player, "flamethrower")) {
 			if(event.getAction() == Action.RIGHT_CLICK_AIR) {
-				if(player.getItemInHand().getType() == Material.FIREBALL) {
+				if(player.getItemInHand().getType() == Material.FIRE_CHARGE) {
 					final Fireball ball = (Fireball) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.FIREBALL);
 						
 					ball.setShooter(player);
@@ -72,7 +72,7 @@ public class EffectListener implements Listener {
 			
 		} else if(playerKitEffect(player, "granades")) {
 			if(event.getAction() == Action.RIGHT_CLICK_AIR) {
-				if(player.getItemInHand().getType() == Material.FIREWORK_CHARGE) {
+				if(player.getItemInHand().getType() == Material.FIREWORK_STAR) {
 					final Item item = player.getWorld().dropItem(player.getEyeLocation(), new ItemStack(player.getItemInHand().getType(), 1));
 						
 					item.setPickupDelay(9999);

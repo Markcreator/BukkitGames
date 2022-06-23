@@ -13,11 +13,11 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -91,13 +91,15 @@ public class PlayerEditListener implements Listener {
     }
     
     @EventHandler
-    public void onPlayerPickupItem(PlayerPickupItemEvent event) {
-    	Player player = event.getPlayer();
-    	
-    	if(!plugin.livingPlayers.contains(player) || plugin.started == false) {
-    		if(!player.isOp()) {
-    			event.setCancelled(true);
-    	    }
+    public void onEntityPickupItem(EntityPickupItemEvent event) {
+    	if(event.getEntityType().equals(EntityType.PLAYER)) {
+        	Player player = (Player) event.getEntity();
+        	
+        	if(!plugin.livingPlayers.contains(player) || plugin.started == false) {
+        		if(!player.isOp()) {
+        			event.setCancelled(true);
+        	    }
+        	}
     	}
     }
     @EventHandler
@@ -158,7 +160,7 @@ public class PlayerEditListener implements Listener {
     			
     				for(Player all : Bukkit.getOnlinePlayers()) {
     					if(plugin.livingPlayers.contains(all)) {
-    						ItemStack playerItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+    						ItemStack playerItem = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
     					
     						ItemMeta playerItemMeta = playerItem.getItemMeta();
     						playerItemMeta.setDisplayName(all.getName());
@@ -179,7 +181,7 @@ public class PlayerEditListener implements Listener {
     		Player player = (Player) event.getWhoClicked();
     		
     		if(!plugin.livingPlayers.contains(player)) {
-    			if(event.getInventory().getName().equals(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_BLUE + "Teleport" + ChatColor.DARK_GRAY + "]")) {
+    			if(event.getView().getTitle().equals(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_BLUE + "Teleport" + ChatColor.DARK_GRAY + "]")) {
     				if(event.getCurrentItem() != null) {
     					event.setCancelled(true);
     					

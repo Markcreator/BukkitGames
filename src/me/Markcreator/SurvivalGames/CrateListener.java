@@ -2,6 +2,9 @@ package me.Markcreator.SurvivalGames;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -73,8 +76,7 @@ public class CrateListener implements Listener {
     	}
     }
     
-    @SuppressWarnings("deprecation")
-	public void fillCrate(Location loc) {
+    public void fillCrate(Location loc) {
     	if(plugin.crates.containsKey(loc)) {
     		Inventory crateInv = plugin.crates.get(loc);
     		
@@ -90,68 +92,53 @@ public class CrateListener implements Listener {
     		    	
     		    	if(itemLevel < 50) {
     		    		Random selectItem = new Random();
-    		    		int item = selectItem.nextInt(plugin.crateData.getConfigurationSection("crateItems.1").getKeys(false).size());
-    		    		
-    		    		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-    		    		for(String all : plugin.crateData.getConfigurationSection("crateItems.1").getKeys(false)) {
-    		    			int itemId = Integer.parseInt(all);
-    		    			ItemStack newItem = new ItemStack(itemId, plugin.crateData.getInt("crateItems.1." + all));
-    		    			items.add(newItem);
-    		    		}
-    		    		
-    		    		crateInv.setItem(i, items.get(item));
-    		    		
+    		    		int itemIndex = selectItem.nextInt(plugin.crateData.getConfigurationSection("crateItems.1").getKeys(false).size());
+    		    		String itemName = (String) plugin.crateData.getConfigurationSection("crateItems.1").getKeys(false).toArray()[itemIndex];
+		    			Material mat = Material.matchMaterial(itemName);
+		    			if(mat != null) {
+		    				ItemStack item = new ItemStack(mat, plugin.crateData.getInt("crateItems.1." + itemName));
+	    		    		crateInv.setItem(i, item);
+		    			}
+    		    		    		    		
     		    	} else if(itemLevel >= 50 && itemLevel < 80) {
     		    		Random selectItem = new Random();
-    		    		int item = selectItem.nextInt(plugin.crateData.getConfigurationSection("crateItems.2").getKeys(false).size());
-    		    		
-    		    		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-    		    		for(String all : plugin.crateData.getConfigurationSection("crateItems.2").getKeys(false)) {
-    		    			int itemId = Integer.parseInt(all);
-    		    			ItemStack newItem = new ItemStack(itemId, plugin.crateData.getInt("crateItems.2." + all));
-    		    			items.add(newItem);
-    		    		}
-    		    		
-    		    		crateInv.setItem(i, items.get(item));
+    		    		int itemIndex = selectItem.nextInt(plugin.crateData.getConfigurationSection("crateItems.2").getKeys(false).size());
+    		    		String itemName = (String) plugin.crateData.getConfigurationSection("crateItems.2").getKeys(false).toArray()[itemIndex];
+		    			Material mat = Material.matchMaterial(itemName);
+		    			if(mat != null) {
+		    				ItemStack item = new ItemStack(mat, plugin.crateData.getInt("crateItems.2." + itemName));
+	    		    		crateInv.setItem(i, item);
+		    			}
     		    		
     		    	} else if(itemLevel >= 80 && itemLevel < 95) {
     		    		Random selectItem = new Random();
-    		    		int item = selectItem.nextInt(plugin.crateData.getConfigurationSection("crateItems.3").getKeys(false).size());
-    		    		
-    		    		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-    		    		for(String all : plugin.crateData.getConfigurationSection("crateItems.3").getKeys(false)) {
-    		    			int itemId = Integer.parseInt(all);
-    		    			ItemStack newItem = new ItemStack(itemId, plugin.crateData.getInt("crateItems.3." + all));
-    		    			items.add(newItem);
-    		    		}
-    		    		
-    		    		crateInv.setItem(i, items.get(item));
+    		    		int itemIndex = selectItem.nextInt(plugin.crateData.getConfigurationSection("crateItems.3").getKeys(false).size());
+    		    		String itemName = (String) plugin.crateData.getConfigurationSection("crateItems.3").getKeys(false).toArray()[itemIndex];
+		    			Material mat = Material.matchMaterial(itemName);
+		    			if(mat != null) {
+		    				ItemStack item = new ItemStack(mat, plugin.crateData.getInt("crateItems.3." + itemName));
+	    		    		crateInv.setItem(i, item);
+		    			}
     		    		
     		    	} else if(itemLevel >= 95 && itemLevel < 99) {
     		    		Random selectItem = new Random();
-    		    		int item = selectItem.nextInt(plugin.crateData.getConfigurationSection("crateItems.4").getKeys(false).size());
-    		    		
-    		    		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-    		    		for(String all : plugin.crateData.getConfigurationSection("crateItems.4").getKeys(false)) {
-    		    			int itemId = Integer.parseInt(all);
-    		    			ItemStack newItem = new ItemStack(itemId, plugin.crateData.getInt("crateItems.4." + all));
-    		    			items.add(newItem);
-    		    		}
-    		    		
-    		    		crateInv.setItem(i, items.get(item));
+    		    		int itemIndex = selectItem.nextInt(plugin.crateData.getConfigurationSection("crateItems.4").getKeys(false).size());
+    		    		String itemName = (String) plugin.crateData.getConfigurationSection("crateItems.4").getKeys(false).toArray()[itemIndex];
+		    			Material mat = Material.matchMaterial(itemName);
+		    			if(mat != null) {
+		    				ItemStack item = new ItemStack(mat, plugin.crateData.getInt("crateItems.4." + itemName));
+	    		    		crateInv.setItem(i, item);
+		    			}
     		    		
     		    	} else if(itemLevel >= 99) {
     		    		Random selectItem = new Random();
-    		    		int item = selectItem.nextInt(plugin.crateData.getConfigurationSection("crateItems.5").getKeys(false).size());
-    		    		
-    		    		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-    		    		for(String all : plugin.crateData.getConfigurationSection("crateItems.5").getKeys(false)) {
-    		    			int itemId = Integer.parseInt(all);
-    		    			ItemStack newItem = new ItemStack(itemId, plugin.crateData.getInt("crateItems.5." + all));
-    		    			items.add(newItem);
-    		    		}
-    		    		
-    		    		crateInv.setItem(i, items.get(item));
+    		    		int itemIndex = selectItem.nextInt(plugin.crateData.getConfigurationSection("crateItems.5").getKeys(false).size());
+    		    		String itemName = (String) plugin.crateData.getConfigurationSection("crateItems.5").getKeys(false).toArray()[itemIndex];
+		    			Material mat = Material.matchMaterial(itemName);
+		    			if(mat != null) {
+		    				ItemStack item = new ItemStack(mat, plugin.crateData.getInt("crateItems.5." + itemName));
+	    		    		crateInv.setItem(i, item);
+		    			}
     		    	}
     		    }
     		}

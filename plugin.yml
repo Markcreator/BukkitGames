@@ -1,6 +1,7 @@
 name: BukkitGames
 main: me.Markcreator.SurvivalGames.Main
-version: 0.9
+version: 0.91
+api-version: 1.13
 load: POSTWORLD
 description: >
              The BukkitGames plugin made by Markcreator.

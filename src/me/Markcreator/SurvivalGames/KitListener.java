@@ -61,7 +61,7 @@ public class KitListener implements Listener {
     				event.setCancelled(true);
     				
     			} else if(!event.getInventory().equals(player.getInventory())) {
-    				if(event.getInventory().getName().equals(ChatColor.BLACK + "[" + ChatColor.DARK_BLUE + "Kits" + ChatColor.BLACK + "]")) {
+    				if(event.getView().getTitle().equals(ChatColor.BLACK + "[" + ChatColor.DARK_BLUE + "Kits" + ChatColor.BLACK + "]")) {
     					if(event.getCurrentItem().getItemMeta() != null) {
     						
     						for(String all : plugin.kitData.getConfigurationSection("kits").getKeys(false)) {
@@ -80,7 +80,7 @@ public class KitListener implements Listener {
     					}
     					event.setCancelled(true);
     					
-    				} else if(event.getInventory().getName().equals(ChatColor.BLACK + "[" + ChatColor.DARK_RED + "Price List" + ChatColor.BLACK + "]")) {
+    				} else if(event.getView().getTitle().equals(ChatColor.BLACK + "[" + ChatColor.DARK_RED + "Price List" + ChatColor.BLACK + "]")) {
     					if(event.getCurrentItem().getItemMeta() != null) {
     						
     						for(String all : plugin.kitData.getConfigurationSection("kits").getKeys(false)) {
@@ -117,8 +117,7 @@ public class KitListener implements Listener {
     	}
     }
     
-    @SuppressWarnings("deprecation")
-	public Inventory createKitList(Player player) {
+    public Inventory createKitList(Player player) {
     	Inventory kitInv = Bukkit.createInventory(null, 36, ChatColor.BLACK + "[" + ChatColor.DARK_BLUE + "Kits" + ChatColor.BLACK + "]");
     	
     	for(String all : plugin.kitData.getConfigurationSection("kits").getKeys(false)) {
@@ -127,8 +126,9 @@ public class KitListener implements Listener {
 				plugin.saveCustomConfig(plugin.playerData, plugin.players);
 			}
     		
-    		ItemStack logoItem = new ItemStack(plugin.kitData.getInt("kits." + all + ".logoItem"));
-    		
+    		Material logoMaterial = Material.matchMaterial(plugin.kitData.getString("kits." + all + ".logoItem"));
+			ItemStack logoItem = new ItemStack(logoMaterial);
+			
     		ItemMeta logoMeta = logoItem.getItemMeta();
         	logoMeta.setDisplayName(ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + all + ChatColor.DARK_GRAY + "]");
         	
@@ -154,8 +154,7 @@ public class KitListener implements Listener {
 		return kitInv;
     }
     
-    @SuppressWarnings("deprecation")
-	public Inventory createPriceList(Player player) {
+    public Inventory createPriceList(Player player) {
     	Inventory priceInv = Bukkit.createInventory(null, 36, ChatColor.BLACK + "[" + ChatColor.DARK_RED + "Price List" + ChatColor.BLACK + "]");
     	
     	for(String all : plugin.kitData.getConfigurationSection("kits").getKeys(false)) {
@@ -165,7 +164,8 @@ public class KitListener implements Listener {
 			}
     		
     		if(!plugin.playerData.getString("players." + player.getName() + ".kits").contains(all + ", ")) {
-    			ItemStack logoItem = new ItemStack(plugin.kitData.getInt("kits." + all + ".logoItem"));
+    			Material logoMaterial = Material.matchMaterial(plugin.kitData.getString("kits." + all + ".logoItem"));
+    			ItemStack logoItem = new ItemStack(logoMaterial);
     		
     			ItemMeta logoMeta = logoItem.getItemMeta();
     			logoMeta.setDisplayName(ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + all + ChatColor.DARK_GRAY + "]");
@@ -199,15 +199,13 @@ public class KitListener implements Listener {
 		return priceInv;
     }
     
-    @SuppressWarnings("deprecation")
-	public void equipPlayer(Player player) {
+    public void equipPlayer(Player player) {
     	player.getInventory().clear();
     	
     	if(plugin.playerKit.containsKey(player)) {
     		if(plugin.kitData.getConfigurationSection("kits." + plugin.playerKit.get(player) + ".items") != null) {
 	    		for(String all : plugin.kitData.getConfigurationSection("kits." + plugin.playerKit.get(player) + ".items").getKeys(false)) {
-	    			int allInt = Integer.parseInt(all);
-	    			player.getInventory().addItem(new ItemStack(allInt, plugin.kitData.getInt("kits." + plugin.playerKit.get(player) + ".items." + all)));
+	    			player.getInventory().addItem(new ItemStack(Material.matchMaterial(all), plugin.kitData.getInt("kits." + plugin.playerKit.get(player) + ".items." + all)));
 	    		}
     		}
     		

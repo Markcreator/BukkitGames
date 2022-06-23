@@ -38,7 +38,7 @@ import org.bukkit.scoreboard.Team;
 
 public class Main extends JavaPlugin {
 
-	public static Main plugin;
+	//public static Main plugin;
 	
 	public final PlayerJoinListener pjl = new PlayerJoinListener(this);
 	public final ServerListPingListener slpl = new ServerListPingListener(this);
@@ -143,7 +143,6 @@ public class Main extends JavaPlugin {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
@@ -152,12 +151,12 @@ public class Main extends JavaPlugin {
 		for(Player all : Bukkit.getOnlinePlayers()) {
 			all.kickPlayer(sg + ChatColor.DARK_RED + "The server is restarting."); 
 		}
-		Bukkit.getScheduler().cancelAllTasks();
+		Bukkit.getScheduler().cancelTasks(this);
 		
 		for(Location all : crateLocs) {
 			if(all.getBlock().getType() == Material.CHEST) {
-				all.getBlock().setData((byte) 0);
-				all.getBlock().setTypeId(0);
+				all.getBlock().setBlockData(Bukkit.createBlockData(Material.AIR));
+				all.getBlock().setType(Material.AIR);
 			}
 		}
 		
@@ -207,9 +206,9 @@ public class Main extends JavaPlugin {
         //World w = wc.createWorld();
 		
 		if(Bukkit.getWorld(world) != null) {
-			Bukkit.getWorld(world).regenerateChunk(0, 0);
+			//Bukkit.getWorld(world).regenerateChunk(0, 0);
 			
-			if(Bukkit.getWorld(world).getBiome(0, 0) == Biome.OCEAN || Bukkit.getWorld(world).getBiome(0, 0) == Biome.DEEP_OCEAN) {
+			if(Bukkit.getWorld(world).getBiome(0, 0, 0) == Biome.OCEAN || Bukkit.getWorld(world).getBiome(0, 0, 0) == Biome.DEEP_OCEAN) {
 				Bukkit.broadcastMessage("------------------------------------------------------------------------ ");
 				Bukkit.broadcastMessage(sg + "The spawn location was inside an ocean biome, please stand by while a new world is generated.");
 				Bukkit.broadcastMessage("------------------------------------------------------------------------ ");
@@ -223,7 +222,7 @@ public class Main extends JavaPlugin {
 			Bukkit.broadcastMessage(sg + "No world called '" + world + "' has been found, the server is shutting down. Please add a world called '" + world + "' to the server to make the server work.");
 			Bukkit.broadcastMessage("------------------------------------------------------------------------ ");
 			
-			Bukkit.getScheduler().cancelAllTasks();
+			Bukkit.getScheduler().cancelTasks(this);
 			
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 				public void run() {
@@ -235,7 +234,7 @@ public class Main extends JavaPlugin {
 		//Scoreboard
 		manager = Bukkit.getScoreboardManager();
 		board = manager.getNewScoreboard();
-		objective = board.registerNewObjective("bukkitgames", "dummy");
+		objective = board.registerNewObjective("bukkitgames", "dummy", sg);
 		
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		objective.setDisplayName(sg);
@@ -624,7 +623,7 @@ public class Main extends JavaPlugin {
 		
 		if(getConfig().getBoolean("dropCrates") == true) {
 			Location newCrateLoc = new Location(Bukkit.getWorld(world), x, Bukkit.getWorld(world).getHighestBlockAt(x, z).getLocation().getBlockY() + 20, z);
-			Bukkit.getWorld(world).spawnFallingBlock(newCrateLoc, Material.CHEST.getId(), (byte) 0);
+			Bukkit.getWorld(world).spawnFallingBlock(newCrateLoc, Material.CHEST, (byte) 0);
 		}
 	}
 	
@@ -638,7 +637,7 @@ public class Main extends JavaPlugin {
 		
 		if(getConfig().getBoolean("dropCrates") == true) {
 			Location newCrateLoc = new Location(Bukkit.getWorld(world), x, Bukkit.getWorld(world).getHighestBlockAt(x, z).getLocation().getBlockY() + 20, z);
-			Bukkit.getWorld(world).spawnFallingBlock(newCrateLoc, Material.CHEST.getId(), (byte) 0);
+			Bukkit.getWorld(world).spawnFallingBlock(newCrateLoc, Material.CHEST, (byte) 0);
 		}
 	}
 	

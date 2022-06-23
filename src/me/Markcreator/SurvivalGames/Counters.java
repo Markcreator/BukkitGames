@@ -122,7 +122,7 @@ public class Counters {
     					Bukkit.broadcastMessage(plugin.sg + ChatColor.GRAY + plugin.counter + " seconds until the game starts.");
 		
     					for(Player all : Bukkit.getOnlinePlayers()) {
-    						all.playSound(all.getLocation(), Sound.BLOCK_NOTE_PLING, 1.0F, 1.0F);
+    						all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0F, 1.0F);
     					}
     				}
     				
@@ -136,7 +136,7 @@ public class Counters {
     						plugin.starting = false;
     						
     						for(Player all : Bukkit.getOnlinePlayers()) {
-    							all.playSound(all.getLocation(), Sound.BLOCK_NOTE_PLING, 1.0F, 2.0F);
+    							all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0F, 2.0F);
     							plugin.kl.equipPlayer(all);
     						}
     						
@@ -197,9 +197,7 @@ public class Counters {
 			
 			Material mat;
 			if(!((mat = newLoc.getBlock().getRelative(0, -2, 0).getType()) == Material.WATER || 
-				mat == Material.STATIONARY_WATER || 
 				mat == Material.LAVA || 
-				mat == Material.STATIONARY_LAVA || 
 				mat == Material.CACTUS ||
 				mat == Material.FIRE)) {
 					loc = newLoc;

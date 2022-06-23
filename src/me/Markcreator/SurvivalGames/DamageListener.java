@@ -487,9 +487,9 @@ public class DamageListener implements Listener {
     		
     		for(Player all : Bukkit.getOnlinePlayers()) {
     			if(!plugin.livingPlayers.contains(all)) {
-    				player.hidePlayer(all);
+    				player.hidePlayer(plugin, all);
     			}
-    			all.hidePlayer(player);
+    			all.hidePlayer(plugin, player);
     		}
     		
 			player.teleport(new Location(Bukkit.getWorld(plugin.world), 0.5, Bukkit.getWorld(plugin.world).getHighestBlockAt(0, 0).getLocation().getBlockY(), 0.5));

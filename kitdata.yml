@@ -1,37 +1,37 @@
 kits:
   Archer:
-    logoItem: 261
+    logoItem: bow
     kitLore:
-      - '&7Shoot your enemys with'
+      - '&7Shoot your enemies with'
       - '&7this trusty Bow!'
       - ''
       - '&7(1 Bow + 10 Arrows)'
     price: 750
     items:
-      '261': 1
-      '262': 10
+      'bow': 1
+      'arrow': 10
   ArcherPro:
-    logoItem: 261
+    logoItem: bow
     kitLore:
-      - '&7Blow your ememys away'
+      - '&7Blow your ememies away'
       - '&7with this powerful Bow!'
       - ''
       - '&7(1 Bow + 3 Arrows +'
       - '&7Explosive Arrows)'
     price: 3500
     items:
-      '261': 1
-      '262': 3
+      'bow': 1
+      'arrow': 3
     potions:
       SPEED:
         amplifier: 1
         duration: 3600
     effect: explodingArrows
   FlamingArcher:
-    logoItem: 261
+    logoItem: bow
     kitLore:
       - '&7Shoot all your'
-      - '&7enemys with flaming'
+      - '&7enemies with flaming'
       - '&7fury!'
       - ''
       - '&7(1 Bow + 5'
@@ -39,21 +39,21 @@ kits:
       - '&7Arrows)'
     price: 3500
     items:
-      '261': 1
-      '262': 5
+      'bow': 1
+      'arrow': 5
     effect: flamingArrows
   SwordsMan:
-    logoItem: 268
+    logoItem: wooden_sword
     kitLore:
       - '&7Swing this sword to'
-      - '&7kill your enemys!'
+      - '&7kill your enemies!'
       - ''
-      - '&7(1 Wood Sword)'
+      - '&7(1 Wooden Sword)'
     price: 300
     items:
-      '268': 1
+      'wooden_sword': 1
   SwordsManPro:
-    logoItem: 272
+    logoItem: stone_sword
     kitLore:
       - '&7A strong sword to cut'
       - '&7through tons of enemies!'
@@ -61,9 +61,9 @@ kits:
       - '&7(1 Stone Sword)'
     price: 500
     items:
-      '272': 1
+      'stone_sword': 1
   Flamethrower:
-    logoItem: 385
+    logoItem: fire_charge
     kitLore:
       - '&7Spit out your burning'
       - '&7flames of death!'
@@ -72,10 +72,10 @@ kits:
       - '&7exploding Fire Charges)'
     price: 1500
     items:
-      '385': 32
+      'fire_charge': 32
     effect: flamethrower
   Granader:
-    logoItem: 402
+    logoItem: firework_star
     kitLore:
       - '&7Throw with your exploding'
       - '&7balls of death!'
@@ -85,5 +85,5 @@ kits:
       - '&7Stars)'
     price: 2000
     items:
-      '402': 20
+      'firework_star': 20
     effect: granades
