@@ -87,3 +87,11 @@ kits:
     items:
       'firework_star': 20
     effect: granades
+  Leaper:
+    logoItem: feather
+    kitLore:
+      - '&7Leap with confidence!'
+      - ''
+      - '&7Right click to leap'
+    price: 2000
+    effect: leap

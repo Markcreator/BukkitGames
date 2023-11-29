@@ -120,7 +120,7 @@ public class PlayerJoinListener implements Listener {
     			player.removePotionEffect(all.getType());
     		}
     		
-    		player.setGameMode(GameMode.SURVIVAL);
+    		player.setGameMode(GameMode.ADVENTURE);
     		player.setAllowFlight(false);
     		
     		if(plugin.getConfig().getBoolean("enableKits") == true) {

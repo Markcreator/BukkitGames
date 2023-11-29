@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -74,6 +75,7 @@ public class Counters {
     							all.getInventory().setBoots(null);
     							all.setLevel(0);
     							all.setExp(0);
+    							all.setGameMode(GameMode.SURVIVAL);
     							
     							if(all.getVehicle() != null) {
     								all.getVehicle().remove();

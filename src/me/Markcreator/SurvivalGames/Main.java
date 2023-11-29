@@ -36,10 +36,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
-public class Main extends JavaPlugin {
-
-	//public static Main plugin;
-	
+public class Main extends JavaPlugin {	
 	public final PlayerJoinListener pjl = new PlayerJoinListener(this);
 	public final ServerListPingListener slpl = new ServerListPingListener(this);
 	public final PlayerEditListener pel = new PlayerEditListener(this);
@@ -346,6 +343,8 @@ public class Main extends JavaPlugin {
 						Bukkit.getScheduler().cancelTask(shrinkId);
 					}
 				}
+				Bukkit.getWorld(world).getWorldBorder().setCenter(0, 0);
+				Bukkit.getWorld(world).getWorldBorder().setSize(arenaSize * 2, 0);
 			}
 		}, 0L, getConfig().getInt("shrinkSpeedInSeconds") * 20);
 		
@@ -430,7 +429,7 @@ public class Main extends JavaPlugin {
 						if(started == false) {
 							if(!hasVoted.contains(player)) {
 								startVotes++;
-								player.sendMessage(sg + ChatColor.GOLD + "You have voted to start the game successfully.");
+								player.sendMessage(sg + ChatColor.GOLD + "You have voted to start the game.");
 								hasVoted.add(player);
 								
 								if(startVotes == getConfig().getInt("votesNeededToAutostart")) {
@@ -518,7 +517,7 @@ public class Main extends JavaPlugin {
 				if(started == false) {
 					if(!hasVoted.contains(player)) {
 						startVotes++;
-						player.sendMessage(sg + ChatColor.GOLD + "You have voted to start the game successfully.");
+						player.sendMessage(sg + ChatColor.GOLD + "You have voted to start the game.");
 						hasVoted.add(player);
 						
 						if(startVotes == getConfig().getInt("votesNeededToAutostart")) {

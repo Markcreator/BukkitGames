@@ -1,7 +1,10 @@
 package me.Markcreator.SurvivalGames;
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
@@ -21,6 +24,8 @@ public class EffectListener implements Listener {
     public EffectListener(Main Plugin) {
         this.plugin = Plugin;   
     }
+    
+    private ArrayList<Player> effectCooldown = new ArrayList<Player>();
     
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent event) {
@@ -92,11 +97,29 @@ public class EffectListener implements Listener {
 					}, 60L);
 				}
 			}
+			
+		} else if(playerKitEffect(player, "leap")) {
+			if(event.getAction() == Action.RIGHT_CLICK_AIR) {
+				if(!effectCooldown.contains(player)) {
+					effectCooldown.add(player);
+					player.setVelocity(player.getVelocity().add(player.getEyeLocation().getDirection().normalize()));
+					player.playSound(player.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 1, 1);
+					
+					Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+						public void run() {
+							if (player != null) {
+								effectCooldown.remove(player);
+								player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_ON, 1, 1);
+							}
+						}
+					}, 40L);
+				}
+			}
     	}
     }
 	
 	public boolean playerKitEffect(Player player, String effect) {
-		if(plugin.playerKit.containsKey(player)) {
+		if(plugin.playerKit.containsKey(player)) {			
 			if(plugin.kitData.getString("kits." + plugin.playerKit.get(player) + ".effect") != null) {
 				if(plugin.kitData.getString("kits." + plugin.playerKit.get(player) + ".effect").equalsIgnoreCase(effect)) {
 					return true;
